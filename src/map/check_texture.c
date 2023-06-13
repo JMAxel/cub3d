@@ -12,21 +12,9 @@
 
 #include "../../include/cub3d.h"
 
-//REFAZER CHECAGEM DE TEXTURA GRAÇAS A MUDANÇAS NO PDF
-
-char	*check_texture(t_map *map, char *line, int fd)
+void	no_option(t_map *map, char *line, int pos)
 {
-	int	count;
+	char	*info;
 
-	count = 0;
-	while (line)
-	{
-		save_texture(map, line, count);
-		line = get_next_line(fd, 1);
-		count++;
-		if (count == 4)
-			break ;
-	}
-	line = get_next_line(fd, 1);
-	return (line);
+	info = ft_substr(line, pos + 3, ft_strlen(line) - pos - 3);
 }

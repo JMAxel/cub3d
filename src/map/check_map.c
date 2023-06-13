@@ -12,18 +12,50 @@
 
 #include "../../include/cub3d.h"
 
+static int	find_info(t_map *map, char *line, int pos)
+{
+	//Refazer ideia para o salvar as informações
+	//Provavelmente substituição de chamada de função por só uma linha
+	if (ft_strnstr(line + pos, "NO", 2))
+		no_option(map, line, pos);
+	else if (ft_strnstr(line + pos, "SO", 2))
+		so_option(map, line, pos);
+	else if (ft_strnstr(line + pos, "WE", 2))
+		we_option(map, line, pos);
+	else if (ft_strnstr(line + pos, "EA", 2))
+		ea_option(map, line, pos);
+	else if (ft_strnstr(line + pos, "F", 1))
+		check_floor_ceiling(map, line, "F");
+	else if (ft_strnstr(line + pos, "C", 1))
+		check_floor_ceiling(map, line, "C");
+	else
+		return (0)
+	return (1);
+}
+
 static void	info_keeper(t_map *map, char *line, int fd)
 {
-	int	count;
+	int count;
+	int	pos;
+	int aux;
 
 	count = 0;
-	while (count != 6)
+	while (count < 6)
 	{
-		if (ft_strnstr(line, "NO ", 3))
-			
-		else if (ft_strnstr(line, "SO ", 3))
-		else if (ft_strnstr(line, "WE ", 3))
-		else if (ft_strnstr(line, "EA ", 3))
+		pos = 0;
+		aux = count;
+		while (line[pos] == " " || line[pos] == "\t")
+			pos++;
+		count += find_info(t_map *map, char *line, int pos);
+		if (line[pos] != "\n")
+			err_msg("Wrong info order or Invalid info found\n");
+		else if (aux == count)
+			line = get_next_line(fd, 1);
+		else
+		{
+			line = get_next_line(fd, 1);
+			count++;
+		}		
 	}
 }
 

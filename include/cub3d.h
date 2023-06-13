@@ -30,7 +30,7 @@ typedef struct s_map
 
 void	err_msg(const char *error);
 void	check_map(t_map *map, const char *file);
-char	*check_texture(t_map *map, char *line, int fd);
+void	check_texture(t_map *map, char *line, int pos, int option);
 char	*check_floor_ceiling(t_map *map, char *line, int fd);
 
 #endif
