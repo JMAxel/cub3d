@@ -14,4 +14,4 @@ jobs:
     - name: make
       run: |
         make
-        valgrind --leak-check=full --show-reachable=yes --show-leak-kinds=all --error-limit=no --gen-suppressions=all --track-origins=yes ./cub3d 
+        valgrind --leak-check=full --show-reachable=yes --show-leak-kinds=all --error-limit=no --gen-suppressions=all --track-origins=yes ./cub3d maps/base.cub
