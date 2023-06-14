@@ -11,11 +11,11 @@
 # **************************************************************************** #
 
 NAME = cub3d
-SRC = src/main.c src/error.c src/map/check_map.c src/map/check_texture.c \
+SRC = src/main.c src/error.c src/map/check_map.c \
 		src/map/check_floor_ceiling.c
 OBJ = $(SRC:.c=.o)
 CC = @cc
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -g
 RM = @rm -f
 
 $(NAME) : $(OBJ) ./libft/libft.a

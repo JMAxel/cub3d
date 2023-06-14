@@ -12,6 +12,15 @@
 
 #include "../include/cub3d.h"
 
+void	free_map(t_map *map)
+{
+	free(map->no_tex);
+	free(map->so_tex);
+	free(map->we_tex);
+	free(map->ea_tex);
+	free(map);
+}
+
 int	main(int argc, char *argv[])
 {
 	t_map	*map;
@@ -20,6 +29,13 @@ int	main(int argc, char *argv[])
 		err_msg("Invalid amount of arguments.\nUsage: ./cub3d example.cub\n");
 	map = (t_map *)malloc(sizeof(t_map));
 	check_map(map, argv[1]);
+	printf("%s\n", map->no_tex);
+	printf("%s\n", map->so_tex);
+	printf("%s\n", map->we_tex);
+	printf("%s\n", map->ea_tex);
+	printf("%d %d %d\n", map->f_color[0], map->f_color[1], map->f_color[2]);
+	printf("%d %d %d\n", map->c_color[0], map->c_color[1], map->c_color[2]);
 	printf("It works!\n");
+	free_map(map);
 	return (0);
 }
