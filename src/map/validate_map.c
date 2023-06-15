@@ -34,17 +34,21 @@ static void	validate_individual(char letter, t_map *map)
 static int	validate_inside(char **space, int line, t_map *map)
 {
 	unsigned int	letter;
+	unsigned int	start;
 
 	letter = 0;
 	while (space[line])
 	{
 		letter = 0;
+		start = 0;
 		while (space[line][letter])
 		{
-			if (letter == 0 || letter == ft_strlen(space[line]))
+			if (letter == start || letter == ft_strlen(space[line]))
 			{
 				if (space[line][letter] != '1' && space[line][letter] != ' ')
 					err_msg("Invalid map info.\n");
+				if (space[line][letter] == ' ')
+					start++;
 			}
 			else
 				validate_individual(space[line][letter], map);
