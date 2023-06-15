@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jogomes- <leugim3005@gmail.com>            +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 14:07:17 by jogomes-          #+#    #+#             */
-/*   Updated: 2023/06/05 14:36:08 by jogomes-         ###   ########.fr       */
+/*   Updated: 2023/06/14 23:40:48 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,5 +70,6 @@ void	check_map(t_map *map, const char *file)
 		err_msg("No map file was found\n");
 	line = get_next_line(fd, 1);
 	info_keeper(map, line, fd);
+	save_map(map, line, fd);
 	close(fd);
 }

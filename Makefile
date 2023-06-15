@@ -3,16 +3,16 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jogomes- <jogomes-@student.42.fr>          +#+  +:+       +#+         #
+#    By: marvin <marvin@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/22 13:29:56 by jogomes-          #+#    #+#              #
-#    Updated: 2023/05/22 17:04:39 by jogomes-         ###   ########.fr        #
+#    Updated: 2023/06/14 21:20:01 by marvin           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = cub3d
-SRC = src/main.c src/error.c src/map/check_map.c \
-		src/map/check_floor_ceiling.c
+SRC = src/main.c src/error.c src/map/check_map.c src/map/save_map.c\
+		src/map/check_floor_ceiling.c src/utils.c
 OBJ = $(SRC:.c=.o)
 CC = @cc
 CFLAGS = -Wall -Wextra -Werror -g
