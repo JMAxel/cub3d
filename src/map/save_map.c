@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   save_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jogomes- <leugim3005@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/14 19:14:01 by marvin            #+#    #+#             */
-/*   Updated: 2023/06/14 19:14:01 by marvin           ###   ########.fr       */
+/*   Created: 2023/06/15 16:24:01 by jogomes-          #+#    #+#             */
+/*   Updated: 2023/06/15 16:24:01 by jogomes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,5 +111,4 @@ void	save_map(t_map *map, char *line, int fd)
 		map_to_space(map, line, fd);
 	else
 		err_msg("Wrong info inside map.\n");
-	free(line);
 }

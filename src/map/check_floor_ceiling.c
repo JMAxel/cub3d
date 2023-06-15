@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: jogomes- <leugim3005@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/22 17:00:58 by jogomes-          #+#    #+#             */
-/*   Updated: 2023/06/05 14:08:58 by jogomes-         ###   ########.fr       */
+/*   Created: 2023/06/15 16:24:26 by jogomes-          #+#    #+#             */
+/*   Updated: 2023/06/15 18:35:11 by jogomes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void	check_floor_ceiling(t_map *map, char *line, char opt, int pos)
 	while (nbr < 3)
 	{
 		single_nbr = single_value(info, single_nbr);
-		if (ft_atoi(single_nbr) >= 0)
+		if (ft_atoi(single_nbr) >= 0 && ft_atoi(single_nbr) < 256)
 		{
 			if (opt == 'F')
 				map->f_color[nbr] = ft_atoi(single_nbr);
