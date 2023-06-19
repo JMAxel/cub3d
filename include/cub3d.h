@@ -6,7 +6,7 @@
 /*   By: jogomes- <leugim3005@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 13:38:52 by jogomes-          #+#    #+#             */
-/*   Updated: 2023/06/15 18:45:51 by jogomes-         ###   ########.fr       */
+/*   Updated: 2023/06/19 17:58:28 by jogomes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include <fcntl.h>
 # include <stdlib.h>
 # include "../libft/libft.h"
+# include "../mlx/mlx.h"
 
 typedef struct s_map
 {
@@ -31,12 +32,22 @@ typedef struct s_map
 	int		player_pos[2];
 }	t_map;
 
+typedef struct s_game
+{
+	void	*mlx;
+	void	*mlx_win;
+	t_map	*map;
+}	t_game;
+
 void	err_msg(const char *error);
 void	check_map(t_map *map, const char *file);
 void	check_floor_ceiling(t_map *map, char *line, char opt, int pos);
 void	free_matrix(char **matrix);
+void	free_map(t_map *map);
 void	save_map(t_map *map, char *line, int fd);
 void	find_player(t_map *map, int line, int letter);
 void	validate_map(t_map *map);
+int		end_game(t_game *game);
+void	print_info_map_test(t_map *map);
 
 #endif

@@ -6,7 +6,7 @@
 #    By: jogomes- <leugim3005@gmail.com>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/22 13:29:56 by jogomes-          #+#    #+#              #
-#    Updated: 2023/06/15 16:46:46 by jogomes-         ###   ########.fr        #
+#    Updated: 2023/06/19 17:12:02 by jogomes-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,7 @@ CFLAGS = -Wall -Wextra -Werror -g
 RM = @rm -f
 
 $(NAME) : $(OBJ) ./libft/libft.a
-	@$(CC) $(CFLAGS) $(OBJ) libft/libft.a -o $(NAME)
+	$(CC) $(CFLAGS) $(OBJ) libft/libft.a mlx/libmlx_Linux.a -lXext -lX11 -lm -o $(NAME)
 	@echo "'cub3d' created!"
 
 all : $(NAME)
