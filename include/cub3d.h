@@ -6,7 +6,7 @@
 /*   By: jogomes- <leugim3005@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 13:38:52 by jogomes-          #+#    #+#             */
-/*   Updated: 2023/06/19 17:58:28 by jogomes-         ###   ########.fr       */
+/*   Updated: 2023/06/19 19:45:11 by jogomes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,5 +49,3 @@ void	find_player(t_map *map, int line, int letter);
 void	validate_map(t_map *map);
 int		end_game(t_game *game);
 void	print_info_map_test(t_map *map);
-
-#endif

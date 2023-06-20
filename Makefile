@@ -6,7 +6,7 @@
 #    By: jogomes- <leugim3005@gmail.com>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/22 13:29:56 by jogomes-          #+#    #+#              #
-#    Updated: 2023/06/19 17:12:02 by jogomes-         ###   ########.fr        #
+#    Updated: 2023/06/19 19:29:13 by jogomes-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,6 +42,10 @@ re : fclean
 	@make
 
 valgrind:
-	valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes --trace-children=yes --track-fds=yes ./cub3d
+	valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes --trace-children=yes --track-fds=yes ./cub3d maps/base.cub
 
-.PHONY : all clean fclean re valgrind
+norminette:
+	@norminette src
+	@norminette include
+
+.PHONY : all clean fclean re valgrind norminette
