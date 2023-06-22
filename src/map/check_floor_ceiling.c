@@ -5,97 +5,59 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: jogomes- <leugim3005@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/22 17:00:58 by jogomes-          #+#    #+#             */
-/*   Updated: 2023/06/05 14:08:58 by jogomes-         ###   ########.fr       */
+/*   Created: 2023/06/15 16:24:26 by jogomes-          #+#    #+#             */
+/*   Updated: 2023/06/15 18:35:11 by jogomes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3d.h"
 
-static char	*save_rgb_ceiling(t_map *map, char *info, int *rgb, int *pos)
+static char	*info_update(char *info, char *single_nbr)
 {
-	char	*nbr;
+	char	*new_info;
+	int		start;
+	int		len;
 
-	nbr = ft_substr(info, 0, *pos);
-	map->c_color[*rgb] = ft_atoi(nbr);
-	printf("C -> %s | %d\n", nbr, map->c_color[*rgb]);
-	*pos = *pos + 1;
-	free(nbr);
-	if (info[*pos])
-	{
-		nbr = ft_substr(info, *pos, ft_strlen(info) - *pos);
-		free(info);
-		*pos = 0;
-		return (nbr);
-	}
-	else
-		return (info);
+	start = ft_strlen(single_nbr) + 1;
+	len = ft_strlen(info);
+	new_info = ft_substr(info, start, len - 3);
+	free(info);
+	free(single_nbr);
+	return (new_info);
 }
 
-static char	*save_rgb_floor(t_map *map, char *info, int *rgb, int *pos)
+char	*single_value(char *info, char *single_nbr)
 {
-	char	*nbr;
-
-	nbr = ft_substr(info, 0, *pos);
-	map->f_color[*rgb] = ft_atoi(nbr);
-	printf("F -> %s | %d\n", nbr, map->c_color[*rgb]);
-	*pos = *pos + 1;
-	free(nbr);
-	if (info[*pos])
-	{
-		nbr = ft_substr(info, *pos, ft_strlen(info) - *pos);
-		free(info);
-		*pos = 0;
-		return (nbr);
-	}
+	if (ft_strchr(info, ','))
+		single_nbr = ft_substr(info, 0,
+				ft_strlen(info) - ft_strlen(ft_strchr(info, ',')));
 	else
-		return (info);
+		single_nbr = ft_strdup(info);
+	return (single_nbr);
 }
 
-static void	check_ceiling(t_map *map, char *line)
+void	check_floor_ceiling(t_map *map, char *line, char opt, int pos)
 {
 	char	*info;
-	int		rgb;
-	int		pos;
+	char	*single_nbr;
+	int		nbr;	
 
-	info = ft_substr(line, 2, ft_strlen(line) - 2);
-	rgb = 0;
-	pos = 0;
-	while (info[pos])
+	nbr = 0;
+	info = ft_substr(line, pos + 2, ft_strlen(line) - pos - 3);
+	while (nbr < 3)
 	{
-		if (info[pos] == ',' || info[pos + 1] == '\0')
-			info = save_rgb_ceiling(map, info, &rgb, &pos);
+		single_nbr = single_value(info, single_nbr);
+		if (ft_atoi(single_nbr) >= 0 && ft_atoi(single_nbr) < 256)
+		{
+			if (opt == 'F')
+				map->f_color[nbr] = ft_atoi(single_nbr);
+			else
+				map->c_color[nbr] = ft_atoi(single_nbr);
+			nbr++;
+		}
 		else
-			pos++;
+			err_msg("Invalid number for floor or ceiling.\n");
+		info = info_update(info, single_nbr);
 	}
 	free(info);
-}
-
-static void	check_floor(t_map *map, char *line)
-{
-	char	*info;
-	int		rgb;
-	int		pos;
-
-	info = ft_substr(line, 2, ft_strlen(line) - 2);
-	rgb = 0;
-	pos = 0;
-	while (info[pos])
-	{
-		if (info[pos] == ',' || info[pos + 1] == '\0')
-			info = save_rgb_floor(map, info, &rgb, &pos);
-		else
-			pos++;
-	}
-	free(info);
-}
-
-char		*check_floor_ceiling(t_map *map, char *line, int fd)
-{
-	check_floor(map, line);
-	line = get_next_line(fd, 1);
-	printf("test -> %s|\n", line);
-	check_ceiling(map, line);
-	line = get_next_line(fd, 1);
-	return (line);
 }
