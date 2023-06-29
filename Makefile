@@ -13,7 +13,8 @@
 NAME = cub3d
 SRC = src/main.c src/error.c src/map/check_map.c src/map/save_map.c\
 		src/map/check_floor_ceiling.c src/utils.c src/map/validate_map.c \
-		src/map/find_player.c
+		src/map/find_player.c src/raycasting.c
+
 OBJ = $(SRC:.c=.o)
 CC = @cc
 CFLAGS = -Wall -Wextra -Werror -g
