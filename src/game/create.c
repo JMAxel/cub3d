@@ -18,15 +18,16 @@ void    load_image(t_game *game, t_info *info, int *texture, char *path)
     int y;
 
     x = 0;
-    info->img = mlx_xpm_file_to_image(game->mlx, path, texSize, texSize);
-    img->data = (int *)mlx_get_data_addr(info->img, info->bpp, info->line,
-            info->endian);
-    while (x < texSize)
+    info->img = mlx_xpm_file_to_image(game->mlx, path, &info->t_width,
+            &info->t_height);
+    info->data = (int *)mlx_get_data_addr(info->img, &info->bpp,
+            &info->size_l, &info->endian);
+    while (x < info->t_height)
     {
         y = 0;
-        while (y < texSize)
+        while (y < info->t_width)
         {
-            texture[texSize * y + x] = info->data[texSize * y + x];
+            texture[info->t_width * y + x] = info->data[info->t_width * y + x];
             y++;
         }
         x++;
@@ -42,9 +43,11 @@ void    load_texture(t_game *game)
     load_image(game, game->info, game->info->texture[3], game->map->ea_tex);
 }
 
-void    creating_game(t_game *game)
+void    creating_game(t_game *game, t_info *info)
 {
-    load_textures(game);
+    load_texture(game);
     game->mlx_win = mlx_new_window(game->mlx, width, height, "cub3d");
-    game->mlx_img = mlx_new_image(game->mlx, width, height);
+    game->info->img = mlx_new_image(game->mlx, width, height);
+    game->info->data = (int *)mlx_get_data_addr(info->img, &info->bpp,
+            &info->size_l, &info->endian);
 }

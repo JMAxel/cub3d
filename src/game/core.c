@@ -12,6 +12,25 @@
 
 #include "../../include/cub3d.h"
 
+static void	update_visual(t_game *game, t_info *info)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while (i < height)
+	{
+		j = 0;
+		while (j < width)
+		{
+			info->data[i * width + j] = info->buf[i][j];
+			j++;
+		}
+		i++;
+	}
+	mlx_put_image_to_window(game->mlx, game->mlx_win, info->img, 0, 0);
+}
+
 void	start_values(t_time *time, t_info *info, int i)
 {
 	time->camera = 2 * i / (double)width - 1;
@@ -27,6 +46,6 @@ void	start_values(t_time *time, t_info *info, int i)
 int core(t_game *game)
 {
     calc(game->info, game);
-    update(game);
+    update_visual(game, game->info);
     return (0);
 }

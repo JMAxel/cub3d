@@ -6,13 +6,13 @@
 /*   By: jogomes- <leugim3005@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 13:35:19 by jogomes-          #+#    #+#             */
-/*   Updated: 2023/07/11 18:47:18 by jogomes-         ###   ########.fr       */
+/*   Updated: 2023/07/12 20:43:41 by jogomes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d.h"
 
-int		**zero_buf(int **buf)
+void	zero_buf(t_info *info)
 {
 	int	i;
 	int	j;
@@ -22,10 +22,9 @@ int		**zero_buf(int **buf)
 	{
 		j = 0;
 		while (j < width)
-			buf[i][j++] = 0;
+			info->buf[i][j++] = 0;
 		i++;
 	}
-	return (buf);
 }
 
 static void		zero_start(t_game *game)
@@ -33,16 +32,18 @@ static void		zero_start(t_game *game)
 	int	i;
 	int	j;
 
-	game->info->buf = zero_buf(game->info->buf);
+	zero_buf(game->info);
 	i = 0;
-	while (i < height)
+	while (i < 4)
 	{
 		j = 0;
-		while (j < width)
+		while (j < texSize * texSize)
 			game->info->texture[i][j++] = 0;
 		i++;
 	}
 	game->info->check_buf = 0;
+	game->info->moveSpeed = 0.05;
+	game->info->rotSpeed = 0.05;
 }
 
 static t_game	*start_variables(char *name)
@@ -56,7 +57,7 @@ static t_game	*start_variables(char *name)
 	zero_start(game);
 	print_info_map_test(game->map);
 	game->mlx = mlx_init();
-	creating_game(game);
+	creating_game(game, game->info);
 	return (game);
 }
 
@@ -68,7 +69,7 @@ int	main(int argc, char *argv[])
 		err_msg("Invalid amount of arguments.\nUsage: ./cub3d example.cub\n");
 	game = start_variables(argv[1]);
 	mlx_loop_hook(game->mlx, &core, game);
-	mlx_hook(game->mlx_win, 17, 1L << 0, &key_press, game);
+	mlx_hook(game->mlx_win, 2, 1L << 0, &key_action, game);
 	mlx_loop(game->mlx);
 	return (0);
 }
