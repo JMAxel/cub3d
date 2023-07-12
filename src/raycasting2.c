@@ -28,7 +28,7 @@ void camera(t_game *game)
 		else
 			game->ray->perpwalldist = (game->ray->dist_yside - game->ray->delta_y);
 		printf("distance %f\n",game->ray->perpwalldist);
-		//draw_wall(game);
+		draw_wall(game, x);
 		x++;
 	}
 }
@@ -92,13 +92,28 @@ void DDA_search(t_game *game)
 	printf("dist_side[%f]::[%f] \n", game->ray->dist_xside, game->ray->dist_yside);
 }
 
-/*void draw_wall(t_game *game)
+void draw_wall(t_game *game, int x)
 {
+	int color = 0x880808;
 	game->ray->lineheight = (int)(h / game->ray->perpwalldist);
-	drawstart = (-game->ray->lineheight + h) / 2;
-    if(drawstart < 0) 
-		drawstart = 0;
-    drawend = (lineheight + h) / 2;
-    if(drawend >= h) 
-		drawend = h - 1;
-}*/
+	game->ray->drawstart = (- game->ray->lineheight + h) / 2;
+    if(game->ray->drawstart < 0) 
+		game->ray->drawstart = 0;
+    game->ray->drawend = (game->ray->lineheight + h) / 2;
+    if(game->ray->drawend >= h) 
+		game->ray->drawend = h - 1;
+	if(game->ray->side == 1)
+		color = color / 2;
+	putverline(game, color, x);
+}
+
+void putverline(t_game *game, int color, int x)
+{
+	int y = game->ray->drawstart;
+
+	while(y < game->ray->drawend)
+	{
+		mlx_pixel_put(game->mlx, game->mlx_win, x, y, color);
+		y++;
+	}
+}

@@ -21,8 +21,8 @@
 # include "../mlx/mlx.h"
 
 # define PI 3.14159265
-# define w 640
-# define h 480
+# define w 1280
+# define h 720
 
 typedef struct s_map
 {
@@ -90,4 +90,6 @@ void	camera(t_game *game);
 void	DDA_set(t_ray *ray);
 void	set_side(t_ray *ray);
 void	DDA_search(t_game *game);
+void	draw_wall(t_game *game, int x);
+void	putverline(t_game *game, int color, int x);
 #endif
