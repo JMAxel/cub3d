@@ -21,6 +21,8 @@
 # include "../mlx/mlx.h"
 
 # define PI 3.14159265
+# define w 640
+# define h 480
 
 typedef struct s_map
 {
@@ -37,17 +39,29 @@ typedef struct s_map
 
 typedef struct s_ray
 {
-    double	pos_i;
-    double	pos_j;
-    double	px;
-    double	py;
-    double	dist;
-    int		bi;
-    int		bj;
-    int		gan;
-    double	d;
-    int		counter;
-	int 	hit;
+    double	pos_x;
+    double	pos_y;
+	double	dir_x;
+	double	dir_y;
+	double	plane_x;
+	double	plane_y;
+	double	camera_x;
+	double	r_dirx;
+	double	r_diry;
+	double	perpwalldist;
+	double	dist_xside;
+	double	dist_yside;
+	double	delta_x;
+	double	delta_y;
+	int		stepx;
+	int		stepy;
+	int		mapx;
+	int		mapy;
+	int		hit;
+	int		side;
+	int		lineheight;
+	int		drawstart;
+	int		drawend;
 }	t_ray;
 
 typedef struct s_game
@@ -69,9 +83,11 @@ void	find_player(t_map *map, int line, int letter);
 void	validate_map(t_map *map);
 int		end_game(t_game *game);
 void	print_info_map_test(t_map *map);
-void	walls_in_sight(t_game *game, double degree);
-void	set_DDA(t_game *game);
-void	search_DDA(t_game *game);
-void	hit_wall(t_game *game);
 
+
+void	raycasting(t_game *game);
+void	camera(t_game *game);
+void	DDA_set(t_ray *ray);
+void	set_side(t_ray *ray);
+void	DDA_search(t_game *game);
 #endif

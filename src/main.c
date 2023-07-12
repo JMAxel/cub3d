@@ -12,12 +12,12 @@
 
 #include "../include/cub3d.h"
 
-static int	input_checker(int key, t_game *game)
+/*static int	input_checker(int key, t_game *game)
 {
 	if (key == 65307)
 		end_game(game);
 	return (0);
-}
+}*/
 
 static t_game	*start_variables(char *name)
 {
@@ -28,9 +28,8 @@ static t_game	*start_variables(char *name)
 	game->ray = (t_ray *)malloc(sizeof(t_ray));
 	check_map(game->map, name);
 	print_info_map_test(game->map);
-	walls_in_sight(game, 90);
-	game->mlx = mlx_init();
-	game->mlx_win = mlx_new_window(game->mlx, 1280, 720, "cub3d");
+	//game->mlx = mlx_init();
+	//game->mlx_win = mlx_new_window(game->mlx, 1280, 720, "cub3d");
 	return (game);
 }
 
@@ -41,9 +40,9 @@ int	main(int argc, char *argv[])
 	if (argc != 2)
 		err_msg("Invalid amount of arguments.\nUsage: ./cub3d example.cub\n");
 	game = start_variables(argv[1]);
-	walls_in_sight(game, 0);
-	mlx_key_hook(game->mlx_win, input_checker, game);
+	raycasting(game);
+	/*mlx_key_hook(game->mlx_win, input_checker, game);
 	mlx_hook(game->mlx_win, 17, 1L >> 2, end_game, game);
-	mlx_loop(game->mlx);
+	mlx_loop(game->mlx);*/
 	return (0);
 }
