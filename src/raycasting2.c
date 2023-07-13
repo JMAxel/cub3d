@@ -2,12 +2,7 @@
 
 void raycasting(t_game *game)
 {
-	game->ray->pos_x = game->map->player_pos[0]; //x posição inicial no grind;
-	game->ray->pos_y = game->map->player_pos[1]; //y posição inicial no grind;
-	game->ray->dir_x = -1;//direção inicial do vetor x;
-	game->ray->dir_y = 0;//direção inicial do vetor y;
-	game->ray->plane_x = 0; // projeção no plano da camera;
-	game->ray->plane_y = 0.66; // FOV de 0.66;
+
 	camera(game);
 }
 
@@ -27,7 +22,7 @@ void camera(t_game *game)
 			game->ray->perpwalldist = (game->ray->dist_xside - game->ray->delta_x);
 		else
 			game->ray->perpwalldist = (game->ray->dist_yside - game->ray->delta_y);
-		printf("distance %f\n",game->ray->perpwalldist);
+		//printf("distance %f\n",game->ray->perpwalldist);
 		draw_wall(game, x);
 		x++;
 	}
@@ -87,14 +82,14 @@ void DDA_search(t_game *game)
 		if(game->map->space[game->ray->mapx][game->ray->mapy] == '1')
 			game->ray->hit = 1;
 	}
-	printf("[%c]",game->map->space[game->ray->mapx][game->ray->mapy]);
+	/*printf("[%c]",game->map->space[game->ray->mapx][game->ray->mapy]);
 	printf("posição do raio[%d]::[%d] \n", game->ray->mapx, game->ray->mapy);
-	printf("dist_side[%f]::[%f] \n", game->ray->dist_xside, game->ray->dist_yside);
+	printf("dist_side[%f]::[%f] \n", game->ray->dist_xside, game->ray->dist_yside)*/
 }
 
 void draw_wall(t_game *game, int x)
 {
-	int color = 0x880808;
+	int color = 0x005508;
 	game->ray->lineheight = (int)(h / game->ray->perpwalldist);
 	game->ray->drawstart = (- game->ray->lineheight + h) / 2;
     if(game->ray->drawstart < 0) 

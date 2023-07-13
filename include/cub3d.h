@@ -43,7 +43,9 @@ typedef struct s_ray
     double	pos_y;
 	double	dir_x;
 	double	dir_y;
+	double	dir_oldx;
 	double	plane_x;
+	double	old_plane_x;
 	double	plane_y;
 	double	camera_x;
 	double	r_dirx;
