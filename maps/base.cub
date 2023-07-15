@@ -3,8 +3,8 @@ SO ./sprites/gray-bricks.xpm
 WE ./sprites/light-blue-bricks.xpm
 EA ./sprites/orange-bricks.xpm
 
-F 220,108,55
-C 100,255,12
+F 0,154,23
+C 173,216,230
 
 		1111111111111111111111111
 		1000000000110000000000001

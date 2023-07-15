@@ -12,6 +12,19 @@
 
 #include "../../include/cub3d.h"
 
+int	check_texture(t_info *info, t_time *time)
+{
+	if (time->rayX < 0 && time->side == 0)
+		return (info->texture[0][texSize * time->texY + time->texX]);
+	if (time->rayX >= 0 && time->side == 0)
+		return (info->texture[1][texSize * time->texY + time->texX]);
+	if (time->rayY < 0 && time->side == 1)
+		return (info->texture[2][texSize * time->texY + time->texX]);
+	if (time->rayY > 0 && time->side == 1)
+		return (info->texture[3][texSize * time->texY + time->texX]);
+	return (0);
+}
+
 static void	update_visual(t_game *game, t_info *info)
 {
 	int	i;

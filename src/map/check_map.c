@@ -6,11 +6,16 @@
 /*   By: jogomes- <leugim3005@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/15 16:24:14 by jogomes-          #+#    #+#             */
-/*   Updated: 2023/07/15 04:09:39 by jogomes-         ###   ########.fr       */
+/*   Updated: 2023/07/15 18:22:19 by jogomes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3d.h"
+
+static int	RGB_to_Hex(int r, int g, int b)
+{
+	return (((r & 0xff) << 16) + ((g & 0xff) << 8) + (b & 0xff));	
+}
 
 static int	find_info(t_map *map, char *line, int pos)
 {
@@ -70,6 +75,10 @@ void	check_map(t_map *map, const char *file, t_game *game)
 		err_msg("No map file was found\n");
 	line = get_next_line(fd, 1);
 	info_keeper(map, line, fd);
+	game->info->f_color =
+		RGB_to_Hex(map->f_color[0], map->f_color[1], map->f_color[2]);
+	game->info->c_color =
+		RGB_to_Hex(map->c_color[0], map->c_color[1], map->c_color[2]);
 	save_map(map, line, fd);
 	validate_map(map, game);
 	close(fd);

@@ -46,7 +46,7 @@ static int	validate_inside(char **space, int line, t_map *map)
 			if (letter == start || letter == ft_strlen(space[line]))
 			{
 				if (space[line][letter] != '1' && space[line][letter] != ' ')
-					err_msg("Invalid map info.\n");
+					err_msg("Invalid map info.2\n");
 				if (space[line][letter] == ' ')
 					start++;
 			}
@@ -61,10 +61,11 @@ static int	validate_inside(char **space, int line, t_map *map)
 
 static int	validate_wall(char **space, int line, int letter)
 {
-	while (space[line][letter])
+	while (space[line][letter] != '\0')
 	{
+		printf("%c\n", space[line][letter]);
 		if (space[line][letter] != '1' && space[line][letter] != ' ')
-			err_msg("Invalid map info.\n");
+			err_msg("Invalid map info.1\n");
 		letter++;
 	}
 	return (line + 1);

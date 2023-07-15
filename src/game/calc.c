@@ -21,8 +21,7 @@ static void	final_calc(t_info *info, t_time *time, int j)
 	{
 		time->texY = (int)time->texP & (texSize - 1);
 		time->texP += time->step;
-		time->color =
-				info->texture[tex][texSize * time->texY + time->texX];
+		time->color = check_texture(info, time);
 		if (time->side == 1)
 			time->color = (time->color >> 1) & 8355711;
 		info->buf[i][j] = time->color;
@@ -116,6 +115,7 @@ void    calc(t_info *info, t_game *game)
 	time = (t_time *)malloc(sizeof(t_time));
 	if (info->check_buf == 1)
 		zero_buf(info);
+	floor_calc(info, time);
 	while (i < width)
 	{
 		start_values(time, info, i);

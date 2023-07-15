@@ -6,7 +6,7 @@
 /*   By: jogomes- <leugim3005@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 13:38:52 by jogomes-          #+#    #+#             */
-/*   Updated: 2023/07/15 04:05:04 by jogomes-         ###   ########.fr       */
+/*   Updated: 2023/07/15 19:03:42 by jogomes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,15 @@ typedef struct s_time
 	double	step;
 	double	texP;
 	int		color;
+	double	rayX0;
+	double	rayY0;
+	double	rayX1;
+	double	rayY1;
+	int		mid;
+	double	cameraV;
+	double	row_dist;
+	double	f_stepX;
+	double	f_stepY;
 }	t_time;
 
 typedef struct s_info
@@ -76,6 +85,8 @@ typedef struct s_info
 	int		t_height;
 	double	moveSpeed;
 	double	rotSpeed;
+	int		f_color;
+	int		c_color;
 }	t_info;
 
 typedef struct s_map
@@ -111,6 +122,8 @@ void	validate_map(t_map *map, t_game *game);
 void    creating_game(t_game *game, t_info *info);
 int		core(t_game *game);
 void    calc(t_info *info, t_game *game);
+void    floor_calc(t_info *info, t_time *time);
+int		check_texture(t_info *info, t_time *time);
 void	start_values(t_time *time, t_info *info, int i);
 int		key_action(int key, t_game *game);
 int		end_game(t_game *game);
