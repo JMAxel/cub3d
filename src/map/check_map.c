@@ -6,7 +6,7 @@
 /*   By: jogomes- <leugim3005@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/15 16:24:14 by jogomes-          #+#    #+#             */
-/*   Updated: 2023/06/15 16:52:29 by jogomes-         ###   ########.fr       */
+/*   Updated: 2023/07/15 04:09:39 by jogomes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ static void	check_map_addr(const char *file)
 		err_msg("Invalid type of map. Please, use a '.cub' format\n");
 }
 
-void	check_map(t_map *map, const char *file)
+void	check_map(t_map *map, const char *file, t_game *game)
 {
 	int		fd;
 	char	*line;
@@ -71,6 +71,6 @@ void	check_map(t_map *map, const char *file)
 	line = get_next_line(fd, 1);
 	info_keeper(map, line, fd);
 	save_map(map, line, fd);
-	validate_map(map);
+	validate_map(map, game);
 	close(fd);
 }

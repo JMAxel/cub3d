@@ -70,14 +70,14 @@ static int	validate_wall(char **space, int line, int letter)
 	return (line + 1);
 }
 
-void	validate_map(t_map *map)
+void	validate_map(t_map *map, t_game *game)
 {
 	int	line;
 	int	letter;
 
 	line = 0;
 	letter = 0;
-	find_player(map, line, letter);
+	find_player(map, line, letter, game);
 	line = validate_wall(map->space, line, letter);
 	line = validate_inside(map->space, line, map);
 	validate_wall(map->space, line, letter);

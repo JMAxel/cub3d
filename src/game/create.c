@@ -27,7 +27,7 @@ void    load_image(t_game *game, t_info *info, int *texture, char *path)
         y = 0;
         while (y < info->t_width)
         {
-            texture[info->t_width * y + x] = info->data[info->t_width * y + x];
+            texture[info->t_width * x + y] = info->data[info->t_width * x + y];
             y++;
         }
         x++;
@@ -39,15 +39,17 @@ void    load_texture(t_game *game)
 {
     load_image(game, game->info, game->info->texture[0], game->map->no_tex);
     load_image(game, game->info, game->info->texture[1], game->map->so_tex);
-    load_image(game, game->info, game->info->texture[2], game->map->we_tex);
-    load_image(game, game->info, game->info->texture[3], game->map->ea_tex);
+    load_image(game, game->info, game->info->texture[2], game->map->ea_tex);
+    load_image(game, game->info, game->info->texture[3], game->map->we_tex);
 }
 
 void    creating_game(t_game *game, t_info *info)
 {
     load_texture(game);
     game->mlx_win = mlx_new_window(game->mlx, width, height, "cub3d");
-    game->info->img = mlx_new_image(game->mlx, width, height);
+    info->img = mlx_new_image(game->mlx, width, height);
     game->info->data = (int *)mlx_get_data_addr(info->img, &info->bpp,
             &info->size_l, &info->endian);
+    info->posX = game->map->player_pos[0];
+    info->posY = game->map->player_pos[1];
 }

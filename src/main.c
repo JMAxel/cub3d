@@ -6,7 +6,7 @@
 /*   By: jogomes- <leugim3005@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 13:35:19 by jogomes-          #+#    #+#             */
-/*   Updated: 2023/07/12 20:43:41 by jogomes-         ###   ########.fr       */
+/*   Updated: 2023/07/15 04:05:34 by jogomes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ static t_game	*start_variables(char *name)
 	game = (t_game *)malloc(sizeof(t_game));
 	game->map = (t_map *)malloc(sizeof(t_map));
 	game->info = (t_info *)malloc(sizeof(t_info));
-	check_map(game->map, name);
+	check_map(game->map, name, game);
 	zero_start(game);
 	print_info_map_test(game->map);
 	game->mlx = mlx_init();

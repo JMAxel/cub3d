@@ -19,10 +19,10 @@ static void	final_calc(t_info *info, t_time *time, int j)
 	i = time->drawStart;
 	while (i < time->drawEnd)
 	{
-		time->texY = (int)time->texP & (texSize - 2);
+		time->texY = (int)time->texP & (texSize - 1);
 		time->texP += time->step;
 		time->color =
-				info->texture[time->tex][texSize * time->texY + time->texX];
+				info->texture[tex][texSize * time->texY + time->texX];
 		if (time->side == 1)
 			time->color = (time->color >> 1) & 8355711;
 		info->buf[i][j] = time->color;
@@ -45,6 +45,7 @@ static void	prepare_draw(t_info *info, t_time *time, t_game *game)
 		time->wallX = info->posY + time->wallDist * time->rayY;
 	else
 		time->wallX = info->posX + time->wallDist * time->rayX;
+	time->wallX -= floor(time->wallX);
 	time->texX = (int)(time->wallX * (double)texSize);
 	if (time->side == 0 && time->rayX > 0)
 		time->texX = texSize - time->texX - 1;
@@ -71,7 +72,7 @@ static void	wall_side(t_info *info, t_time *time, t_game *game)
 			time->mapY += time->stepY;
 			time->side = 1;
 		}
-		if (game->map->space[time->mapX][time->mapY] > 0)
+		if (game->map->space[time->mapX][time->mapY] == '1')
 			time->wall = 1;
 	}
 	if (time->side == 0)

@@ -6,7 +6,7 @@
 /*   By: jogomes- <leugim3005@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 13:38:52 by jogomes-          #+#    #+#             */
-/*   Updated: 2023/07/12 19:58:33 by jogomes-         ###   ########.fr       */
+/*   Updated: 2023/07/15 04:05:04 by jogomes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,14 +100,14 @@ typedef struct s_game
 }	t_game;
 
 void	err_msg(const char *error);
-void	check_map(t_map *map, const char *file);
+void	check_map(t_map *map, const char *file, t_game *game);
 void	check_floor_ceiling(t_map *map, char *line, char opt, int pos);
 void	free_matrix(char **matrix);
 void	zero_buf(t_info *info);
 void	free_map(t_map *map);
 void	save_map(t_map *map, char *line, int fd);
-void	find_player(t_map *map, int line, int letter);
-void	validate_map(t_map *map);
+void	find_player(t_map *map, int line, int letter, t_game *game);
+void	validate_map(t_map *map, t_game *game);
 void    creating_game(t_game *game, t_info *info);
 int		core(t_game *game);
 void    calc(t_info *info, t_game *game);
