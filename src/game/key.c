@@ -14,57 +14,57 @@
 
 static void	left_side(t_info *info)
 {
-	double	oldDirX;
-	double	oldPlaneX;
+	double	old_dir_x;
+	double	old_plane_x;
 
-	oldDirX = info->dirX;
-	oldPlaneX = info->planeX;
-	info->dirX = info->dirX * cos(info->rotSpeed)
-		- info->dirY * sin(info->rotSpeed);
-	info->dirY = oldDirX * sin(info->rotSpeed)
-		+ info->dirY * cos(info->rotSpeed);
-	info->planeX = info->planeX * cos(info->rotSpeed)
-		- info->planeY * sin(info->rotSpeed);
-	info->planeY = oldPlaneX * sin(info->rotSpeed)
-		+ info->planeY * cos(info->rotSpeed);
+	old_dir_x = info->dir_x;
+	old_plane_x = info->plane_x;
+	info->dir_x = info->dir_x * cos(info->rotspeed)
+		- info->dir_y * sin(info->rotspeed);
+	info->dir_y = old_dir_x * sin(info->rotspeed)
+		+ info->dir_y * cos(info->rotspeed);
+	info->plane_x = info->plane_x * cos(info->rotspeed)
+		- info->plane_y * sin(info->rotspeed);
+	info->plane_y = old_plane_x * sin(info->rotspeed)
+		+ info->plane_y * cos(info->rotspeed);
 }
 
 static void	right_side(t_info *info)
 {
-	double	oldDirX;
-	double	oldPlaneX;
+	double	old_dir_x;
+	double	old_plane_x;
 
-	oldDirX = info->dirX;
-	oldPlaneX = info->planeX;
-	info->dirX = info->dirX * cos(-info->rotSpeed)
-		- info->dirY * sin(-info->rotSpeed);
-	info->dirY = oldDirX * sin(-info->rotSpeed)
-		+ info->dirY * cos(-info->rotSpeed);
-	info->planeX = info->planeX * cos(-info->rotSpeed)
-		- info->planeY * sin(-info->rotSpeed);
-	info->planeY = oldPlaneX * sin(-info->rotSpeed)
-		+ info->planeY * cos(-info->rotSpeed);
+	old_dir_x = info->dir_x;
+	old_plane_x = info->plane_x;
+	info->dir_x = info->dir_x * cos(-info->rotspeed)
+		- info->dir_y * sin(-info->rotspeed);
+	info->dir_y = old_dir_x * sin(-info->rotspeed)
+		+ info->dir_y * cos(-info->rotspeed);
+	info->plane_x = info->plane_x * cos(-info->rotspeed)
+		- info->plane_y * sin(-info->rotspeed);
+	info->plane_y = old_plane_x * sin(-info->rotspeed)
+		+ info->plane_y * cos(-info->rotspeed);
 }
 
 static void	forward_and_back(int key, char **space, t_info *info)
 {
 	if (key == K_W)
 	{
-		if (space[(int)(info->posX + info->dirX * info->moveSpeed)]
-				[(int)(info->posY)] != '1')
-			info->posX += info->dirX * info->moveSpeed;
-		if (space[(int)(info->posX)]
-				[(int)(info->posY + info->dirY * info->moveSpeed)] != '1')
-			info->posY += info->dirY * info->moveSpeed;
+		if (space[(int)(info->pos_x + info->dir_x * info->movespeed)]
+				[(int)(info->pos_y)] != '1')
+			info->pos_x += info->dir_x * info->movespeed;
+		if (space[(int)(info->pos_x)]
+				[(int)(info->pos_y + info->dir_y * info->movespeed)] != '1')
+			info->pos_y += info->dir_y * info->movespeed;
 	}
 	else
 	{
-		if (space[(int)(info->posX - info->dirX * info->moveSpeed)]
-				[(int)(info->posY)] != '1')
-			info->posX -= info->dirX * info->moveSpeed;
-		if (space[(int)(info->posX)]
-				[(int)(info->posY - info->dirY * info->moveSpeed)] != '1')
-			info->posY -= info->dirY * info->moveSpeed;
+		if (space[(int)(info->pos_x - info->dir_x * info->movespeed)]
+				[(int)(info->pos_y)] != '1')
+			info->pos_x -= info->dir_x * info->movespeed;
+		if (space[(int)(info->pos_x)]
+				[(int)(info->pos_y - info->dir_y * info->movespeed)] != '1')
+			info->pos_y -= info->dir_y * info->movespeed;
 	}
 }
 
@@ -79,8 +79,6 @@ int	key_action(int key, t_game *game)
 	if (key == K_ESC)
 		exit(0);
 	mlx_clear_window(game->mlx, game->mlx_win);
-	printf("dirX %f | dirY %f\n", game->info->dirX, game->info->dirY);
-	printf("planeX %f | planeY %f\n", game->info->planeX, game->info->planeY);
 	core(game);
-	return(0);
+	return (0);
 }

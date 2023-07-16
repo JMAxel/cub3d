@@ -16,11 +16,11 @@ static void	final_calc(t_info *info, t_time *time, int j)
 {
 	int	i;
 
-	i = time->drawStart;
-	while (i < time->drawEnd)
+	i = time->draw_start;
+	while (i < time->draw_end)
 	{
-		time->texY = (int)time->texP & (texSize - 1);
-		time->texP += time->step;
+		time->tex_y = (int)time->tex_p & (TEXSIZE - 1);
+		time->tex_p += time->step;
 		time->color = check_texture(info, time);
 		if (time->side == 1)
 			time->color = (time->color >> 1) & 8355711;
@@ -32,91 +32,91 @@ static void	final_calc(t_info *info, t_time *time, int j)
 
 static void	prepare_draw(t_info *info, t_time *time, t_game *game)
 {
-	time->lineHeight = (int)(height / time->wallDist);
-	time->drawStart = -time->lineHeight / 2 + height / 2;
-	if (time->drawStart < 0)
-		time->drawStart = 0;
-	time->drawEnd = time->lineHeight / 2 + height / 2;
-	if (time->drawEnd >= height)
-		time->drawEnd = height - 1;
-	time->tex = game->map->space[time->mapX][time->mapY];
+	time->line_height = (int)(HEIGHT / time->walldist);
+	time->draw_start = -time->line_height / 2 + HEIGHT / 2;
+	if (time->draw_start < 0)
+		time->draw_start = 0;
+	time->draw_end = time->line_height / 2 + HEIGHT / 2;
+	if (time->draw_end >= HEIGHT)
+		time->draw_end = HEIGHT - 1;
+	time->tex = game->map->space[time->map_x][time->map_y];
 	if (time->side == 0)
-		time->wallX = info->posY + time->wallDist * time->rayY;
+		time->wall_x = info->pos_y + time->walldist * time->ray_y;
 	else
-		time->wallX = info->posX + time->wallDist * time->rayX;
-	time->wallX -= floor(time->wallX);
-	time->texX = (int)(time->wallX * (double)texSize);
-	if (time->side == 0 && time->rayX > 0)
-		time->texX = texSize - time->texX - 1;
-	if (time->side == 1 && time->rayY < 0)
-		time->texX = texSize - time->texX - 1;
-	time->step = 1.0 * texSize / time->lineHeight;
-	time->texP = (time->drawStart - height / 2 + time->lineHeight / 2) *
-			time->step;
+		time->wall_x = info->pos_x + time->walldist * time->ray_x;
+	time->wall_x -= floor(time->wall_x);
+	time->tex_x = (int)(time->wall_x * (double)TEXSIZE);
+	if (time->side == 0 && time->ray_x > 0)
+		time->tex_x = TEXSIZE - time->tex_x - 1;
+	if (time->side == 1 && time->ray_y < 0)
+		time->tex_x = TEXSIZE - time->tex_x - 1;
+	time->step = 1.0 * TEXSIZE / time->line_height;
+	time->tex_p = (time->draw_start - HEIGHT / 2 + time->line_height / 2)
+		* time->step;
 }
 
 static void	wall_side(t_info *info, t_time *time, t_game *game)
 {
 	while (time->wall == 0)
 	{
-		if (time->sideX < time->sideY)
+		if (time->side_x < time->side_y)
 		{
-			time->sideX += time->deltaX;
-			time->mapX += time->stepX;
+			time->side_x += time->delta_x;
+			time->map_x += time->step_x;
 			time->side = 0;
 		}
 		else
 		{
-			time->sideY += time->deltaY;
-			time->mapY += time->stepY;
+			time->side_y += time->delta_y;
+			time->map_y += time->step_y;
 			time->side = 1;
 		}
-		if (game->map->space[time->mapX][time->mapY] == '1')
+		if (game->map->space[time->map_x][time->map_y] == '1')
 			time->wall = 1;
 	}
 	if (time->side == 0)
-		time->wallDist = (time->mapX - info->posX + (1 - time->stepX) / 2) /
-			time->rayX;
+		time->walldist = (time->map_x - info->pos_x + (1 - time->step_x) / 2)
+			/ time->ray_x;
 	else
-		time->wallDist = (time->mapY - info->posY + (1 - time->stepY) / 2) /
-			time->rayY;
+		time->walldist = (time->map_y - info->pos_y + (1 - time->step_y) / 2)
+			/ time->ray_y;
 }
 
 static void	step_way(t_info *info, t_time *time)
 {
-	if (time->rayX < 0)
+	if (time->ray_x < 0)
 	{
-		time->stepX = -1;
-		time->sideX = (info->posX - time->mapX) * time->deltaX;
+		time->step_x = -1;
+		time->side_x = (info->pos_x - time->map_x) * time->delta_x;
 	}
 	else
 	{
-		time->stepX = 1;
-		time->sideX = (time->mapX + 1.0 - info->posX) * time->deltaX;
+		time->step_x = 1;
+		time->side_x = (time->map_x + 1.0 - info->pos_x) * time->delta_x;
 	}
-	if (time->rayY < 0)
+	if (time->ray_y < 0)
 	{
-		time->stepY = -1;
-		time->sideY = (info->posY - time->mapY) * time->deltaY;
+		time->step_y = -1;
+		time->side_y = (info->pos_y - time->map_y) * time->delta_y;
 	}
 	else
 	{
-		time->stepY = 1;
-		time->sideY = (time->mapY + 1.0 - info->posY) * time->deltaY;
+		time->step_y = 1;
+		time->side_y = (time->map_y + 1.0 - info->pos_y) * time->delta_y;
 	}
 }
 
-void    calc(t_info *info, t_game *game)
+void	calc(t_info *info, t_game *game)
 {
-	int i;
-	t_time *time;
+	int		i;
+	t_time	*time;
 
 	i = 0;
 	time = (t_time *)malloc(sizeof(t_time));
 	if (info->check_buf == 1)
 		zero_buf(info);
 	floor_calc(info, time);
-	while (i < width)
+	while (i < WIDTH)
 	{
 		start_values(time, info, i);
 		step_way(info, time);

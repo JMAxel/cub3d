@@ -16,17 +16,17 @@ static int	north_or_south(char letter, t_info *info)
 {
 	if (letter == 'N')
 	{
-		info->dirX = -1.0;
-    	info->dirY = 0.0;
-    	info->planeX = 0.0;
-    	info->planeY = 0.66;
+		info->dir_x = -1.0;
+		info->dir_y = 0.0;
+		info->plane_x = 0.0;
+		info->plane_y = 0.66;
 	}
 	if (letter == 'S')
 	{
-		info->dirX = 1.0;
-    	info->dirY = 0.0;
-    	info->planeX = 0.0;
-    	info->planeY = -0.66;
+		info->dir_x = 1.0;
+		info->dir_y = 0.0;
+		info->plane_x = 0.0;
+		info->plane_y = -0.66;
 	}
 	return (1);
 }
@@ -34,21 +34,21 @@ static int	north_or_south(char letter, t_info *info)
 static int	specify_player(char letter, t_info *info)
 {
 	if (letter == 'N' || letter == 'S')
-		return(north_or_south(letter, info));
+		return (north_or_south(letter, info));
 	if (letter == 'W')
 	{
-		info->dirX = 0.0;
-    	info->dirY = -1.0;
-    	info->planeX = -0.66;
-    	info->planeY = 0.0;
+		info->dir_x = 0.0;
+		info->dir_y = -1.0;
+		info->plane_x = -0.66;
+		info->plane_y = 0.0;
 		return (1);
 	}
 	if (letter == 'E')
 	{
-		info->dirX = 0.0;
-    	info->dirY = 1.0;
-    	info->planeX = 0.66;
-    	info->planeY = 0.0;
+		info->dir_x = 0.0;
+		info->dir_y = 1.0;
+		info->plane_x = 0.66;
+		info->plane_y = 0.0;
 		return (1);
 	}
 	return (0);

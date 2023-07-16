@@ -63,7 +63,6 @@ static int	validate_wall(char **space, int line, int letter)
 {
 	while (space[line][letter] != '\0')
 	{
-		printf("%c\n", space[line][letter]);
 		if (space[line][letter] != '1' && space[line][letter] != ' ')
 			err_msg("Invalid map info.1\n");
 		letter++;

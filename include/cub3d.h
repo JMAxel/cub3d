@@ -6,7 +6,7 @@
 /*   By: jogomes- <leugim3005@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 13:38:52 by jogomes-          #+#    #+#             */
-/*   Updated: 2023/07/15 19:03:42 by jogomes-         ###   ########.fr       */
+/*   Updated: 2023/07/15 21:51:03 by jogomes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,9 @@
 # include <math.h>
 # include "../libft/libft.h"
 # include "../mlx/mlx.h"
-# define width 1280
-# define height 720
-# define texSize 100
+# define WIDTH 1280
+# define HEIGHT 720
+# define TEXSIZE 100
 # define K_W 119
 # define K_A 97
 # define K_S 115
@@ -31,60 +31,51 @@
 typedef struct s_time
 {
 	double	camera;
-	double	rayX;
-	double	rayY;
-	double	sideX;
-	double	sideY;
-	double	deltaX;
-	double	deltaY;
-	double	wallDist;
-	int		stepX;
-	int		stepY;
-	int		mapX;
-	int		mapY;
+	double	ray_x;
+	double	ray_y;
+	double	side_x;
+	double	side_y;
+	double	delta_x;
+	double	delta_y;
+	double	walldist;
+	int		step_x;
+	int		step_y;
+	int		map_x;
+	int		map_y;
 	int		wall;
 	int		side;
-	int		lineHeight;
-	int		drawStart;
-	int		drawEnd;
+	int		line_height;
+	int		draw_start;
+	int		draw_end;
 	int		tex;
-	double	wallX;
-	int		texX;
-	int		texY;
+	double	wall_x;
+	int		tex_x;
+	int		tex_y;
 	double	step;
-	double	texP;
+	double	tex_p;
 	int		color;
-	double	rayX0;
-	double	rayY0;
-	double	rayX1;
-	double	rayY1;
-	int		mid;
-	double	cameraV;
-	double	row_dist;
-	double	f_stepX;
-	double	f_stepY;
 }	t_time;
 
 typedef struct s_info
 {
-	double	posX;
-	double	posY;
-	double	dirX;
-	double	dirY;
-	double	planeX;
-	double	planeY;
+	double	pos_x;
+	double	pos_y;
+	double	dir_x;
+	double	dir_y;
+	double	plane_x;
+	double	plane_y;
 	void	*img;
 	int		*data;
 	int		bpp;
 	int		size_l;
 	int		endian;
-	int		texture[4][texSize * texSize];
-	int		buf[height][width];
+	int		**texture;
+	int		**buf;
 	int		check_buf;
 	int		t_width;
 	int		t_height;
-	double	moveSpeed;
-	double	rotSpeed;
+	double	movespeed;
+	double	rotspeed;
 	int		f_color;
 	int		c_color;
 }	t_info;
@@ -119,10 +110,10 @@ void	free_map(t_map *map);
 void	save_map(t_map *map, char *line, int fd);
 void	find_player(t_map *map, int line, int letter, t_game *game);
 void	validate_map(t_map *map, t_game *game);
-void    creating_game(t_game *game, t_info *info);
+void	creating_game(t_game *game, t_info *info);
 int		core(t_game *game);
-void    calc(t_info *info, t_game *game);
-void    floor_calc(t_info *info, t_time *time);
+void	calc(t_info *info, t_game *game);
+void	floor_calc(t_info *info, t_time *time);
 int		check_texture(t_info *info, t_time *time);
 void	start_values(t_time *time, t_info *info, int i);
 int		key_action(int key, t_game *game);

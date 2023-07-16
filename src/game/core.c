@@ -14,14 +14,14 @@
 
 int	check_texture(t_info *info, t_time *time)
 {
-	if (time->rayX < 0 && time->side == 0)
-		return (info->texture[0][texSize * time->texY + time->texX]);
-	if (time->rayX >= 0 && time->side == 0)
-		return (info->texture[1][texSize * time->texY + time->texX]);
-	if (time->rayY < 0 && time->side == 1)
-		return (info->texture[2][texSize * time->texY + time->texX]);
-	if (time->rayY > 0 && time->side == 1)
-		return (info->texture[3][texSize * time->texY + time->texX]);
+	if (time->ray_x < 0 && time->side == 0)
+		return (info->texture[0][TEXSIZE * time->tex_y + time->tex_x]);
+	if (time->ray_x >= 0 && time->side == 0)
+		return (info->texture[1][TEXSIZE * time->tex_y + time->tex_x]);
+	if (time->ray_y < 0 && time->side == 1)
+		return (info->texture[2][TEXSIZE * time->tex_y + time->tex_x]);
+	if (time->ray_y > 0 && time->side == 1)
+		return (info->texture[3][TEXSIZE * time->tex_y + time->tex_x]);
 	return (0);
 }
 
@@ -31,12 +31,12 @@ static void	update_visual(t_game *game, t_info *info)
 	int	j;
 
 	i = 0;
-	while (i < height)
+	while (i < HEIGHT)
 	{
 		j = 0;
-		while (j < width)
+		while (j < WIDTH)
 		{
-			info->data[i * width + j] = info->buf[i][j];
+			info->data[i * WIDTH + j] = info->buf[i][j];
 			j++;
 		}
 		i++;
@@ -46,19 +46,19 @@ static void	update_visual(t_game *game, t_info *info)
 
 void	start_values(t_time *time, t_info *info, int i)
 {
-	time->camera = 2 * i / (double)width - 1;
-	time->rayX = info->dirX + info->planeX * time->camera;
-	time->rayY = info->dirY + info->planeY * time->camera;
-	time->deltaX = fabs(1 / time->rayX);
-	time->deltaY = fabs(1 / time->rayY);
-	time->mapX = (int)info->posX;
-	time->mapY = (int)info->posY;
+	time->camera = 2 * i / (double)WIDTH - 1;
+	time->ray_x = info->dir_x + info->plane_x * time->camera;
+	time->ray_y = info->dir_y + info->plane_y * time->camera;
+	time->delta_x = fabs(1 / time->ray_x);
+	time->delta_y = fabs(1 / time->ray_y);
+	time->map_x = (int)info->pos_x;
+	time->map_y = (int)info->pos_y;
 	time->wall = 0;
 }
 
-int core(t_game *game)
+int	core(t_game *game)
 {
-    calc(game->info, game);
-    update_visual(game, game->info);
-    return (0);
+	calc(game->info, game);
+	update_visual(game, game->info);
+	return (0);
 }

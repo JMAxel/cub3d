@@ -51,7 +51,6 @@ static char	*line_to_answer(char *line, char *answer)
 		else
 			answer[ans_pos++] = line[line_pos++];
 	}
-	printf("%s\n", answer);
 	return (answer);
 }
 
