@@ -6,7 +6,7 @@
 /*   By: jogomes- <leugim3005@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/15 16:24:14 by jogomes-          #+#    #+#             */
-/*   Updated: 2023/07/15 21:17:57 by jogomes-         ###   ########.fr       */
+/*   Updated: 2023/07/17 14:10:37 by jogomes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,7 @@ void	check_map(t_map *map, const char *file, t_game *game)
 		= rgb_to_hex(map->f_color[0], map->f_color[1], map->f_color[2]);
 	game->info->c_color
 		= rgb_to_hex(map->c_color[0], map->c_color[1], map->c_color[2]);
+	check_files(map);
 	save_map(map, line, fd);
 	validate_map(map, game);
 	close(fd);

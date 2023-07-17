@@ -6,7 +6,7 @@
 /*   By: jogomes- <leugim3005@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 13:38:52 by jogomes-          #+#    #+#             */
-/*   Updated: 2023/07/17 02:56:46 by jogomes-         ###   ########.fr       */
+/*   Updated: 2023/07/17 14:16:45 by jogomes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,6 +112,8 @@ typedef struct s_game
 void	err_msg(const char *error);
 void	check_map(t_map *map, const char *file, t_game *game);
 void	check_floor_ceiling(t_map *map, char *line, char opt, int pos);
+void	check_files(t_map *map);
+void	check_format(t_map *map);
 void	free_matrix(char **matrix);
 void	zero_buf(t_info *info);
 void	free_map(t_map *map);

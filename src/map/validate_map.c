@@ -12,6 +12,29 @@
 
 #include "../../include/cub3d.h"
 
+void	check_files(t_map *map)
+{
+	int	fd;
+
+	check_format(map);
+	fd = open(map->no_tex, O_RDONLY);
+	if (fd == -1)
+		err_msg("Invalid path to texture.\n");
+	close(fd);
+	fd = open(map->so_tex, O_RDONLY);
+	if (fd == -1)
+		err_msg("Invalid path to texture.\n");
+	close(fd);
+	fd = open(map->we_tex, O_RDONLY);
+	if (fd == -1)
+		err_msg("Invalid path to texture.\n");
+	close(fd);
+	fd = open(map->ea_tex, O_RDONLY);
+	if (fd == -1)
+		err_msg("Invalid path to texture.\n");
+	close(fd);
+}
+
 static void	validate_individual(char letter, t_map *map)
 {
 	if (letter == ' ')

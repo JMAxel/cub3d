@@ -6,11 +6,23 @@
 /*   By: jogomes- <leugim3005@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/15 16:24:26 by jogomes-          #+#    #+#             */
-/*   Updated: 2023/06/15 18:35:11 by jogomes-         ###   ########.fr       */
+/*   Updated: 2023/07/17 14:19:36 by jogomes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3d.h"
+
+void	check_format(t_map *map)
+{
+	if (ft_strncmp(map->no_tex + (ft_strlen(map->no_tex) - 4), ".xpm", 4))
+		err_msg("Invalid path format\n");
+	if (ft_strncmp(map->so_tex + (ft_strlen(map->so_tex) - 4), ".xpm", 4))
+		err_msg("Invalid path format\n");
+	if (ft_strncmp(map->we_tex + (ft_strlen(map->we_tex) - 4), ".xpm", 4))
+		err_msg("Invalid path format\n");
+	if (ft_strncmp(map->ea_tex + (ft_strlen(map->ea_tex) - 4), ".xpm", 4))
+		err_msg("Invalid path format\n");
+}
 
 static char	*info_update(char *info, char *single_nbr)
 {
