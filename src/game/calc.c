@@ -125,4 +125,5 @@ void	calc(t_info *info, t_game *game)
 		final_calc(info, time, i);
 		i++;
 	}
+	free(time);
 }

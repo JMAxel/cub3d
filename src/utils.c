@@ -17,7 +17,20 @@ void	free_matrix(char **matrix)
 	int	count;
 
 	count = 0;
-	while (matrix[count])
+	while (matrix[count] != NULL)
+	{
+		free(matrix[count]);
+		count++;
+	}
+	free(matrix);
+}
+
+void	free_matrix_int(int **matrix)
+{
+	int	count;
+
+	count = 0;
+	while (matrix[count] != NULL)
 	{
 		free(matrix[count]);
 		count++;
@@ -38,7 +51,14 @@ void	free_map(t_map *map)
 int	end_game(t_game *game)
 {
 	free_map(game->map);
+	free(game->info->data);
+	mlx_destroy_image(game->mlx, game->info->img);
 	mlx_destroy_window(game->mlx, game->mlx_win);
+	free_matrix_int(game->info->texture);
+	free_matrix_int(game->info->buf);
+	free(game->mlx);
+	free(game->info);
+	free(game);
 	exit(0);
 	return (0);
 }
@@ -58,7 +78,7 @@ int	key_press(int key, t_game *game)
 	else if (key == K_AR_R)
 		game->info->key_ar_r = 1;
 	else if (key == K_ESC)
-		exit(0);
+		end_game(game);
 	return (0);
 }
 
