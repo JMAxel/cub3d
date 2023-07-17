@@ -19,16 +19,12 @@ static t_game	*start_variables(char *name)
 	game = (t_game *)malloc(sizeof(t_game));
 	game->map = (t_map *)malloc(sizeof(t_map));
 	game->ray = (t_ray *)malloc(sizeof(t_ray));
+	game->info = (t_info *)malloc(sizeof(t_info));
 	check_map(game->map, name);
-	print_info_map_test(game->map);
-	game->ray->pos_x = game->map->player_pos[0]; //x posição inicial no grind;
-	game->ray->pos_y = game->map->player_pos[1]; //y posição inicial no grind;
-	game->ray->dir_x = -1;//direção inicial do vetor x;
-	game->ray->dir_y = 0;//direção inicial do vetor y;
-	game->ray->plane_x = 0; // projeção no plano da camera;
-	game->ray->plane_y = 0.66; // FOV de 0.66;
+	zero_start(game);
+	init_ray(game);
 	game->mlx = mlx_init();
-	game->mlx_win = mlx_new_window(game->mlx, 1280, 720, "cub3d");
+	creating_game(game, game->info);
 	return (game);
 }
 

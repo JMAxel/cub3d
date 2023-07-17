@@ -20,7 +20,7 @@
 # include "../libft/libft.h"
 # include "../mlx/mlx.h"
 
-# define PI 3.14159265
+# define TEXSIZE 100
 # define W 1280
 # define H 720
 
@@ -50,15 +50,11 @@ typedef struct s_ray
 	double	camera_x;
 	double	r_dirx;
 	double	r_diry;
-	double	perpwalldist;
+	double	walldist;
 	double	dist_xside;
 	double	dist_yside;
 	double	delta_x;
 	double	delta_y;
-	int		w;
-	int		s;
-	int		d;
-	int		a;
 	int		stepx;
 	int		stepy;
 	int		mapx;
@@ -70,12 +66,44 @@ typedef struct s_ray
 	int		drawend;
 }	t_ray;
 
+typedef struct s_info
+{
+	int		w;
+	int		s;
+	int		d;
+	int		a;
+
+	int		tex;
+	int		tex_x;
+	int		tex_y;
+	int		tex_p;
+	int		color;
+	double	step;
+	double	wall_x;
+
+
+	void	*img;
+	int		*data;
+	int		bpp;
+	int		size_l;
+	int		endian;
+	int		**texture;
+	int		**buf;
+	int		check_buf;
+	int		t_width;
+	int		t_height;
+
+	int		f_color;
+	int		c_color;
+}	t_info;
+
 typedef struct s_game
 {
 	void	*mlx;
 	void	*mlx_win;
 	t_map	*map;
 	t_ray	*ray;
+	t_info	*info;
 
 }	t_game;
 
@@ -90,12 +118,21 @@ void	validate_map(t_map *map);
 void	print_info_map_test(t_map *map);
 //renderizar o jogo
 int		raycasting(t_game *game);
-void	camera(t_game *game);
+void	init_ray(t_game *game);
+void	camera(t_game *game, t_ray *ray);
 void	DDA_set(t_ray *ray);
 void	set_side(t_ray *ray);
-void	DDA_search(t_game *game);
-void	draw_wall(t_game *game, int x);
-void	putverline(t_game *game, int color, int x);
+void	DDA_search(t_game *game, t_ray *ray);
+//texture
+int		check_texture(t_info *info, t_ray *ray);
+void	start_tex_buf(t_info *info);
+void	zero_buf(t_info *info);
+void	zero_start(t_game *game);
+void	prepare_draw(t_game *game, t_ray *ray, t_info *info);
+void	draw_wall(t_ray *ray, t_info *info, int x);
+void	floor_calc(t_info *info);
+void	update_visual(t_game *game, t_info *info);
+void	creating_game(t_game *game, t_info *info);
 //keys and hooks
 int		key_press(int key, t_game *game);
 int		key_release(int key, t_game *game);

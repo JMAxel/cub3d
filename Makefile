@@ -14,7 +14,9 @@ NAME = cub3d
 SRC = src/main.c src/error.c src/map/check_map.c src/map/save_map.c\
 		src/map/check_floor_ceiling.c src/utils.c src/map/validate_map.c \
 		src/map/find_player.c src/raycasting/raycasting2.c src/key/key.c \
-		src/key/key_press.c
+		src/key/key_press.c src/raycasting/init_raycasting.c \
+		src/texture/load_texture.c src/texture/put_texture.c \
+		src/texture/zero_start.c \
 
 OBJ = $(SRC:.c=.o)
 CC = @cc
