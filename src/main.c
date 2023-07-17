@@ -6,7 +6,7 @@
 /*   By: jogomes- <leugim3005@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 13:35:19 by jogomes-          #+#    #+#             */
-/*   Updated: 2023/07/15 23:26:32 by jogomes-         ###   ########.fr       */
+/*   Updated: 2023/07/17 03:24:49 by jogomes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,7 @@ static t_game	*start_variables(char *name)
 	zero_start(game);
 	game->mlx = mlx_init();
 	creating_game(game, game->info);
+	start_key(game);
 	return (game);
 }
 
@@ -89,7 +90,9 @@ int	main(int argc, char *argv[])
 		err_msg("Invalid amount of arguments.\nUsage: ./cub3d example.cub\n");
 	game = start_variables(argv[1]);
 	mlx_loop_hook(game->mlx, &core, game);
-	mlx_hook(game->mlx_win, 2, 1L << 0, &key_action, game);
+	mlx_hook(game->mlx_win, 2, 1L << 0, &key_press, game);
+	mlx_hook(game->mlx_win, 3, 1L << 1, &key_release, game);
+	mlx_hook(game->mlx_win, 17, 1L << 0, &end_game, game);
 	mlx_loop(game->mlx);
 	return (0);
 }

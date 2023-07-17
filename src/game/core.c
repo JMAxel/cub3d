@@ -59,6 +59,7 @@ void	start_values(t_time *time, t_info *info, int i)
 int	core(t_game *game)
 {
 	calc(game->info, game);
+	key_action(game, game->info);
 	update_visual(game, game->info);
 	return (0);
 }

@@ -43,21 +43,38 @@ int	end_game(t_game *game)
 	return (0);
 }
 
-void	print_info_map_test(t_map *map)
+int	key_press(int key, t_game *game)
 {
-	int	i;
+	if (key == K_W)
+		game->info->key_w = 1;
+	else if (key == K_S)
+		game->info->key_s = 1;
+	else if (key == K_A)
+		game->info->key_a = 1;
+	else if (key == K_D)
+		game->info->key_d = 1;
+	else if (key == K_AR_L)
+		game->info->key_ar_l = 1;
+	else if (key == K_AR_R)
+		game->info->key_ar_r = 1;
+	else if (key == K_ESC)
+		exit(0);
+	return (0);
+}
 
-	i = 0;
-	printf("%s\n", map->no_tex);
-	printf("%s\n", map->so_tex);
-	printf("%s\n", map->we_tex);
-	printf("%s\n", map->ea_tex);
-	printf("%d %d %d\n", map->f_color[0], map->f_color[1], map->f_color[2]);
-	printf("%d %d %d\n\n", map->c_color[0], map->c_color[1], map->c_color[2]);
-	while (map->space[i])
-	{
-		printf("%s\n", map->space[i]);
-		i++;
-	}
-	printf("It works!\n");
+int	key_release(int key, t_game *game)
+{
+	if (key == K_W)
+		game->info->key_w = 0;
+	else if (key == K_S)
+		game->info->key_s = 0;
+	else if (key == K_A)
+		game->info->key_a = 0;
+	else if (key == K_D)
+		game->info->key_d = 0;
+	else if (key == K_AR_L)
+		game->info->key_ar_l = 0;
+	else if (key == K_AR_R)
+		game->info->key_ar_r = 0;
+	return (0);
 }

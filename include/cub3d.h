@@ -6,7 +6,7 @@
 /*   By: jogomes- <leugim3005@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 13:38:52 by jogomes-          #+#    #+#             */
-/*   Updated: 2023/07/15 21:51:03 by jogomes-         ###   ########.fr       */
+/*   Updated: 2023/07/17 02:56:46 by jogomes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@
 # define K_A 97
 # define K_S 115
 # define K_D 100
+# define K_AR_L 65361
+# define K_AR_R 65363
 # define K_ESC 65307
 
 typedef struct s_time
@@ -78,6 +80,12 @@ typedef struct s_info
 	double	rotspeed;
 	int		f_color;
 	int		c_color;
+	int		key_w;
+	int		key_s;
+	int		key_a;
+	int		key_d;
+	int		key_ar_l;
+	int		key_ar_r;
 }	t_info;
 
 typedef struct s_map
@@ -111,12 +119,15 @@ void	save_map(t_map *map, char *line, int fd);
 void	find_player(t_map *map, int line, int letter, t_game *game);
 void	validate_map(t_map *map, t_game *game);
 void	creating_game(t_game *game, t_info *info);
+void	start_key(t_game *game);
 int		core(t_game *game);
 void	calc(t_info *info, t_game *game);
 void	floor_calc(t_info *info, t_time *time);
 int		check_texture(t_info *info, t_time *time);
 void	start_values(t_time *time, t_info *info, int i);
-int		key_action(int key, t_game *game);
+int		key_action(t_game *game, t_info *info);
+int		key_press(int key, t_game *game);
+int		key_release(int key, t_game *game);
 int		end_game(t_game *game);
 void	print_info_map_test(t_map *map);
 
