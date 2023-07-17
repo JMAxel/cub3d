@@ -6,7 +6,7 @@
 /*   By: jogomes- <leugim3005@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 13:35:19 by jogomes-          #+#    #+#             */
-/*   Updated: 2023/07/17 03:24:49 by jogomes-         ###   ########.fr       */
+/*   Updated: 2023/07/17 16:46:04 by jogomes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static void	start_tex_buf(t_info *info)
 	}
 	i = 0;
 	info->buf = ft_calloc(HEIGHT, sizeof(int *));
-	while (i < WIDTH)
+	while (i < HEIGHT)
 	{
 		info->buf[i] = ft_calloc(WIDTH, sizeof(int));
 		i++;

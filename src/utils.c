@@ -12,50 +12,13 @@
 
 #include "../include/cub3d.h"
 
-void	free_matrix(char **matrix)
-{
-	int	count;
-
-	count = 0;
-	while (matrix[count] != NULL)
-	{
-		free(matrix[count]);
-		count++;
-	}
-	free(matrix);
-}
-
-void	free_matrix_int(int **matrix)
-{
-	int	count;
-
-	count = 0;
-	while (matrix[count] != NULL)
-	{
-		free(matrix[count]);
-		count++;
-	}
-	free(matrix);
-}
-
-void	free_map(t_map *map)
-{
-	free(map->no_tex);
-	free(map->so_tex);
-	free(map->we_tex);
-	free(map->ea_tex);
-	free_matrix(map->space);
-	free(map);
-}
-
 int	end_game(t_game *game)
 {
 	free_map(game->map);
-	free(game->info->data);
 	mlx_destroy_image(game->mlx, game->info->img);
 	mlx_destroy_window(game->mlx, game->mlx_win);
-	free_matrix_int(game->info->texture);
-	free_matrix_int(game->info->buf);
+	free_matrix_tex(game->info->texture);
+	free_matrix_buf(game->info->buf);
 	free(game->mlx);
 	free(game->info);
 	free(game);

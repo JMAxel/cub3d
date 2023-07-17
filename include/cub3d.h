@@ -6,7 +6,7 @@
 /*   By: jogomes- <leugim3005@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 13:38:52 by jogomes-          #+#    #+#             */
-/*   Updated: 2023/07/17 14:16:45 by jogomes-         ###   ########.fr       */
+/*   Updated: 2023/07/17 17:01:12 by jogomes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,6 +115,8 @@ void	check_floor_ceiling(t_map *map, char *line, char opt, int pos);
 void	check_files(t_map *map);
 void	check_format(t_map *map);
 void	free_matrix(char **matrix);
+void	free_matrix_tex(int **matrix);
+void	free_matrix_buf(int **matrix);
 void	zero_buf(t_info *info);
 void	free_map(t_map *map);
 void	save_map(t_map *map, char *line, int fd);
@@ -130,7 +132,7 @@ void	start_values(t_time *time, t_info *info, int i);
 int		key_action(t_game *game, t_info *info);
 int		key_press(int key, t_game *game);
 int		key_release(int key, t_game *game);
+void	free_matrix_int(int **matrix);
 int		end_game(t_game *game);
-void	print_info_map_test(t_map *map);
 
 #endif
