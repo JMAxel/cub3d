@@ -21,8 +21,8 @@
 # include "../mlx/mlx.h"
 
 # define PI 3.14159265
-# define w 1280
-# define h 720
+# define W 1280
+# define H 720
 
 typedef struct s_map
 {
@@ -55,6 +55,10 @@ typedef struct s_ray
 	double	dist_yside;
 	double	delta_x;
 	double	delta_y;
+	int		w;
+	int		s;
+	int		d;
+	int		a;
 	int		stepx;
 	int		stepy;
 	int		mapx;
@@ -75,23 +79,32 @@ typedef struct s_game
 
 }	t_game;
 
+
+//validação de mapa
 void	err_msg(const char *error);
 void	check_map(t_map *map, const char *file);
 void	check_floor_ceiling(t_map *map, char *line, char opt, int pos);
-void	free_matrix(char **matrix);
-void	free_map(t_map *map);
 void	save_map(t_map *map, char *line, int fd);
 void	find_player(t_map *map, int line, int letter);
 void	validate_map(t_map *map);
-int		end_game(t_game *game);
 void	print_info_map_test(t_map *map);
-
-
-void	raycasting(t_game *game);
+//renderizar o jogo
+int		raycasting(t_game *game);
 void	camera(t_game *game);
 void	DDA_set(t_ray *ray);
 void	set_side(t_ray *ray);
 void	DDA_search(t_game *game);
 void	draw_wall(t_game *game, int x);
 void	putverline(t_game *game, int color, int x);
+//keys and hooks
+int		key_press(int key, t_game *game);
+int		key_release(int key, t_game *game);
+void	right_key(t_game *game);
+void	left_key(t_game *game);
+void	down_key(t_game *game);
+void	up_key(t_game *game);
+//limpeza de memoria e finalização do jogo
+void	free_matrix(char **matrix);
+void	free_map(t_map *map);
+int		end_game(t_game *game);
 #endif

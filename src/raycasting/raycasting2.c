@@ -1,9 +1,17 @@
-#include "../include/cub3d.h"
+#include "../../include/cub3d.h"
 
-void raycasting(t_game *game)
+int raycasting(t_game *game)
 {
-
+	if (game->ray->w == 1)
+		up_key(game);
+	else if (game->ray->s == 1)
+		down_key(game);
+	else if (game->ray->d == 1)
+		right_key(game);
+	else if (game->ray->a == 1)
+		left_key(game);
 	camera(game);
+	return (0);
 }
 
 void camera(t_game *game)
@@ -11,9 +19,9 @@ void camera(t_game *game)
 	int x;
 
 	x = 0;
-	while(x < w) //varrer todo o eixo x da camera;
+	while(x < W) //varrer todo o eixo x da camera;
 	{
-		game->ray->camera_x = 2 * x / (double)w -1; // coordenadas x no plano da camera;
+		game->ray->camera_x = 2 * x / (double)W -1; // coordenadas x no plano da camera;
 		game->ray->r_dirx = game->ray->dir_x + game->ray->plane_x * game->ray->camera_x;
 		game->ray->r_diry = game->ray->dir_y + game->ray->plane_y * game->ray->camera_x;
 		DDA_set(game->ray); // mira o raio
@@ -22,7 +30,6 @@ void camera(t_game *game)
 			game->ray->perpwalldist = (game->ray->dist_xside - game->ray->delta_x);
 		else
 			game->ray->perpwalldist = (game->ray->dist_yside - game->ray->delta_y);
-		//printf("distance %f\n",game->ray->perpwalldist);
 		draw_wall(game, x);
 		x++;
 	}
@@ -90,13 +97,13 @@ void DDA_search(t_game *game)
 void draw_wall(t_game *game, int x)
 {
 	int color = 0x005508;
-	game->ray->lineheight = (int)(h / game->ray->perpwalldist);
-	game->ray->drawstart = (- game->ray->lineheight + h) / 2;
+	game->ray->lineheight = (int)(H / game->ray->perpwalldist);
+	game->ray->drawstart = (- game->ray->lineheight + H) / 2;
     if(game->ray->drawstart < 0) 
 		game->ray->drawstart = 0;
-    game->ray->drawend = (game->ray->lineheight + h) / 2;
-    if(game->ray->drawend >= h) 
-		game->ray->drawend = h - 1;
+    game->ray->drawend = (game->ray->lineheight + H) / 2;
+    if(game->ray->drawend >= H) 
+		game->ray->drawend = H - 1;
 	if(game->ray->side == 1)
 		color = color / 2;
 	putverline(game, color, x);

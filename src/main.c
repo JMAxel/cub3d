@@ -12,59 +12,6 @@
 
 #include "../include/cub3d.h"
 
-static int	input_checker(int key, t_game *game)
-{
-	if (key == 65307)
-		end_game(game);
-	else if (key == 119)
-	{
-		if(game->map->space[(int)(game->ray->pos_x + game->ray->dir_x)][(int)(game->ray->pos_y)] != '1')
-			game->ray->pos_x += game->ray->dir_x;
-		if(game->map->space[(int)(game->ray->pos_x)][(int)(game->ray->pos_y + game->ray->dir_y)] != '1')
-			game->ray->pos_y += game->ray->dir_y;
-		mlx_clear_window(game->mlx, game->mlx_win);
-		raycasting(game);
-	}
-	else if (key == 115)
-	{
-		if(game->map->space[(int)(game->ray->pos_x - game->ray->dir_x)][(int)(game->ray->pos_y)] != '1')
-			game->ray->pos_x -= game->ray->dir_x;
-		if(game->map->space[(int)(game->ray->pos_x)][(int)(game->ray->pos_y - game->ray->dir_y)] != '1')
-			game->ray->pos_y -= game->ray->dir_y;
-		mlx_clear_window(game->mlx, game->mlx_win);
-		raycasting(game);
-	}
-	else if(key == 97)
-    {
-      //both camera direction and camera plane must be rotated
-	  //matrix transposta (positiva pra virar pra esquerda)
-	  game->ray->dir_oldx = game->ray->dir_x;
-	  game->ray->dir_x = game->ray->dir_x * cos(20*PI/180) - game->ray->dir_y * sin(20*PI/180);
-      game->ray->dir_y = game->ray->dir_oldx * sin(20*PI/180) + game->ray->dir_y* cos(20*PI/180);
-      game->ray->old_plane_x = game->ray->plane_x;
-      game->ray->plane_x = game->ray->plane_x * cos(20*PI/180) - game->ray->plane_y * sin(20*PI/180);
-      game->ray->plane_y = game->ray->old_plane_x * sin(20*PI/180) + game->ray->plane_y * cos(20*PI/180);
-	  mlx_clear_window(game->mlx, game->mlx_win);
-	  raycasting(game);
-    }
-	else if(key == 100)
-    {
-      //both camera direction and camera plane must be rotated
-	  //matrix transposta (negativa pra virar pra direita)
-      game->ray->dir_oldx = game->ray->dir_x;
-      game->ray->dir_x = game->ray->dir_x * cos(-20*PI/180) - game->ray->dir_y * sin(-20*PI/180);
-      game->ray->dir_y= game->ray->dir_oldx * sin(-20*PI/180) + game->ray->dir_y* cos(-20*PI/180);
-      game->ray->old_plane_x = game->ray->plane_x;
-      game->ray->plane_x = game->ray->plane_x * cos(-20*PI/180) - game->ray->plane_y * sin(-20*PI/180);
-      game->ray->plane_y = game->ray->old_plane_x * sin(-20*PI/180) + game->ray->plane_y * cos(-20*PI/180);
-	  mlx_clear_window(game->mlx, game->mlx_win);
-	  raycasting(game);
-    }
-	else
-		printf("key :: %d ", key);
-	return (0);
-}
-
 static t_game	*start_variables(char *name)
 {
 	t_game	*game;
@@ -92,8 +39,9 @@ int	main(int argc, char *argv[])
 	if (argc != 2)
 		err_msg("Invalid amount of arguments.\nUsage: ./cub3d example.cub\n");
 	game = start_variables(argv[1]);
-	raycasting(game);
-	mlx_key_hook(game->mlx_win, input_checker, game);
+	mlx_loop_hook(game->mlx, &raycasting, game);
+	mlx_hook(game->mlx_win, 2, 1L << 0, &key_press, game);
+	mlx_hook(game->mlx_win, 3, 1L << 1, &key_release, game);
 	mlx_hook(game->mlx_win, 17, 1L >> 2, end_game, game);
 	mlx_loop(game->mlx);
 	return (0);
