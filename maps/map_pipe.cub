@@ -1,0 +1,18 @@
+NO ./sprites/dark-blue-bricks.xpm
+SO ./sprites/orange-bricks.xpm
+WE ./sprites/light-blue-bricks.xpm
+EA ./sprites/gray-bricks.xpm
+
+F 0,250,140
+C 120,255,230
+
+  11111111
+ 1100000011
+110000000011		
+100000000001
+100000N00001
+110000000011
+ 1100000011
+  11000011
+   110011
+    1111

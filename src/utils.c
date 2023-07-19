@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/14 21:17:51 by marvin            #+#    #+#             */
-/*   Updated: 2023/06/14 21:17:51 by marvin           ###   ########.fr       */
+/*   Updated: 2023/07/19 12:37:48 by gacoelho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ int	end_game(t_game *game)
 	free_map(game->map);
 	mlx_destroy_image(game->mlx, game->info->img);
 	mlx_destroy_window(game->mlx, game->mlx_win);
+	mlx_destroy_display(game->mlx);
 	free_matrix_tex(game->info->texture);
 	free_matrix_buf(game->info->buf);
 	free(game->mlx);

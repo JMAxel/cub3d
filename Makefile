@@ -6,11 +6,11 @@
 #    By: jogomes- <leugim3005@gmail.com>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/22 13:29:56 by jogomes-          #+#    #+#              #
-#    Updated: 2023/07/17 17:01:37 by jogomes-         ###   ########.fr        #
+#    Updated: 2023/07/19 12:27:39 by gacoelho         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = cub3d
+NAME = cub3D
 SRC = src/main.c src/error.c src/map/check_map.c src/map/save_map.c\
 		src/map/check_floor_ceiling.c src/utils.c src/map/validate_map.c \
 		src/map/find_player.c src/game/calc.c src/game/core.c src/game/create.c \
