@@ -35,73 +35,30 @@ void	check_files(t_map *map)
 	close(fd);
 }
 
-static void	validate_individual(char letter, t_map *map)
+static int	flood_fill(char **space, int x, int y)
 {
-	if (letter == ' ')
-		return ;
-	if (letter == '1')
-		return ;
-	if (letter == '0')
-		return ;
-	if (letter == map->space[map->player_pos[0]][map->player_pos[1]])
-	{
-		if (map->player == 2)
-			err_msg("Two or more players were found.\n");
-		else
-			map->player = 2;
-		return ;
-	}
-	err_msg("Invalid map info.\n");
-}
+	int	s[8];
 
-static int	validate_inside(char **space, int line, t_map *map)
-{
-	unsigned int	letter;
-	unsigned int	start;
-
-	letter = 0;
-	while (space[line])
-	{
-		letter = 0;
-		start = 0;
-		while (space[line][letter])
-		{
-			if (letter == start || letter == ft_strlen(space[line]))
-			{
-				if (space[line][letter] != '1' && space[line][letter] != ' ')
-					err_msg("Invalid map info.2\n");
-				if (space[line][letter] == ' ')
-					start++;
-			}
-			else
-				validate_individual(space[line][letter], map);
-			letter++;
-		}
-		line++;
-	}
-	return (line - 1);
-}
-
-static int	validate_wall(char **space, int line, int letter)
-{
-	while (space[line][letter] != '\0')
-	{
-		if (space[line][letter] != '1' && space[line][letter] != ' ')
-			err_msg("Invalid map info.1\n");
-		letter++;
-	}
-	return (line + 1);
+	if (y < 0 || x < 0 || space[x][y] == ' ' || space[x][y] == 0
+		|| space[x] == 0)
+		return (0);
+	else if (space[x][y] == '1' || space[x][y] == '.')
+		return (1);
+	space[x][y] = '.';
+	s[0] = flood_fill(space, x, y + 1);
+	s[1] = flood_fill(space, x, y - 1);
+	s[2] = flood_fill(space, x + 1, y);
+	s[3] = flood_fill(space, x - 1, y);
+	s[4] = flood_fill(space, x + 1, y + 1);
+	s[5] = flood_fill(space, x + 1, y - 1);
+	s[6] = flood_fill(space, x + 1, y + 1);
+	s[7] = flood_fill(space, x - 1, y + 1);
+	return (s[0] && s[1] && s[2] && s[3] && s[4] && s[5] && s[6] && s[7]);
 }
 
 void	validate_map(t_map *map, t_game *game)
 {
-	int	line;
-	int	letter;
-
-	line = 0;
-	letter = 0;
-	find_player(map, line, letter, game);
-	line = validate_wall(map->space, line, letter);
-	line = validate_inside(map->space, line, map);
-	validate_wall(map->space, line, letter);
+	find_player(map, 0, 0, game);
+	if (!flood_fill(map->space, map->player_pos[0], map->player_pos[1]))
+		err_msg("Invalid walls.\n");
 }

@@ -50,6 +50,6 @@ void	creating_game(t_game *game, t_info *info)
 	info->img = mlx_new_image(game->mlx, WIDTH, HEIGHT);
 	game->info->data = (int *)mlx_get_data_addr(info->img, &info->bpp,
 			&info->size_l, &info->endian);
-	info->pos_x = game->map->player_pos[0];
-	info->pos_y = game->map->player_pos[1];
+	info->pos_x = game->map->player_pos[0] + 0.5;
+	info->pos_y = game->map->player_pos[1] + 0.5;
 }

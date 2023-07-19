@@ -80,6 +80,7 @@ static void	map_to_space(t_map *map, char *line, int fd)
 
 	pos = 0;
 	map->space = ft_calloc(2, sizeof(char *));
+	map->space_x = 2;
 	while (42)
 	{
 		map->space[pos] = format_string(line);
@@ -89,6 +90,7 @@ static void	map_to_space(t_map *map, char *line, int fd)
 		if (!line)
 			break ;
 		map->space = reallocate_space(pos + 2, map->space);
+		map->space_x += 1;
 	}
 }
 

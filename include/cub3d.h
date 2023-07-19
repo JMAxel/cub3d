@@ -6,7 +6,7 @@
 /*   By: jogomes- <leugim3005@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 13:38:52 by jogomes-          #+#    #+#             */
-/*   Updated: 2023/07/17 17:01:12 by jogomes-         ###   ########.fr       */
+/*   Updated: 2023/07/19 02:40:45 by jogomes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,9 @@ typedef struct s_info
 typedef struct s_map
 {
 	char	**space;
+	char	**space_copy;
+	int		space_x;
+	int		start[2];
 	char	*no_tex;
 	char	*so_tex;
 	char	*we_tex;
